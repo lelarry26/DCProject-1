@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>API TEST SITE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 
 <body>
@@ -19,7 +21,9 @@
     <ul id="gameList">
     </ul>
   </div>
+<p id = upcoming>
 
+</p>
   <script>
     const form = document.getElementById("gameSearch");
     const gameData = document.getElementById("gameData");
@@ -66,6 +70,68 @@
     //     });
     // });
   
+   
+//OPENCRITIC API - This one will only bring up game titles...
+    // form.addEventListener('submit', (event) => {
+    //   event.preventDefault();
+    //   console.log(event);
+    //   const gameSearch = event.target.gameSearch.value;
+    //   const url = `https://opencritic-api.p.rapidapi.com/game/search?criteria=${gameSearch}`;
+    //   const options = {
+    // 	  method: 'GET',
+    // 	  headers: {
+    // 		  'X-RapidAPI-Key': '6acd22919fmsh67d97738d0c2b37p1c55b4jsnf3f6b669c6cd',
+    // 		  'X-RapidAPI-Host': 'opencritic-api.p.rapidapi.com'
+    // 	  }
+    //   };
+
+    //   try {
+    // 	  const response = fetch(url, options)
+    //     .then(res => res.json())
+    //         .then(data => {
+    //           console.log(data);
+    //         }) 
+    //     }
+    //   catch (error) {
+    // 	console.error(error);
+    //   }
+    // });
+
+//OPENCRITIC API - This one will tell you the 8 nearest upcoming games and the release dates on initial window load
+// window.addEventListener('load', (event) => {
+//   event.preventDefault();
+//   console.log(event);
+//   const url = `https://opencritic-api.p.rapidapi.com/game/upcoming`;
+//   const options = {
+// 	  method: 'GET',
+// 	  headers: {
+// 		  'X-RapidAPI-Key': '6acd22919fmsh67d97738d0c2b37p1c55b4jsnf3f6b669c6cd',
+// 		  'X-RapidAPI-Host': 'opencritic-api.p.rapidapi.com'
+// 	  }
+//   };
+
+//   try {
+// 	  const response = fetch(url, options)
+//     .then(res => res.json())
+//         .then(data => {
+//           console.log("this is the data")
+//           console.log(data);
+//           for(i=0; i<data.length; i++){
+//             const gameListItem = document.createElement("li");
+//             const gameList = document.getElementById("gameList");
+//             gameList.appendChild(gameListItem);
+//             gameListItem.innerHTML = `
+//             ${data[i].name}, is releasing on ${data[i].firstReleaseDate}
+//             `
+//             console.log("Looped")
+//           }
+//         });
+//       }
+//   catch (error) {
+//   console.log("this is the error")
+// 	console.error(error);
+//   }
+// });
   </script>
 
 </body>
