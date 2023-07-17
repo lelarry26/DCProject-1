@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API TEST SITE</title>
+</head>
+
+<body>
+
+  <form id="gameSearch">
+    <input id="gameSearch" name="gameSearch" type="text">
+    <button>Get Games</button>
+  </form>
+
+  <div id="gameData">
+    <ul id="gameList">
+    </ul>
+  </div>
+
+  <script>
+    const form = document.getElementById("gameSearch");
+    const gameData = document.getElementById("gameData");
+//CHEAPSHARK API - Search by Game Title and populate gameList <ul> with the game titles in <li>
+    // form.addEventListener('submit', (event) => {
+    //   event.preventDefault();
+    //   console.log(event);
+    //   const gameSearch = event.target.gameSearch.value;
+    //   console.log(gameSearch);
+    //   fetch(`https://www.cheapshark.com/api/1.0/games?title=${gameSearch}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       console.log(data);
+    //       for(i=0; i<data.length; i++){
+    //         const gameListItem = document.createElement("li");
+    //         const gameList = document.getElementById("gameList");
+    //         gameList.appendChild(gameListItem);
+    //         gameListItem.innerHTML = `
+    //         ${data[i].external}
+    //         `
+    //       }
+    //     });
+    // });
+    const apiKey = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce" //GAMESPOT API KEY
+//GAMESPOT API - Currently not working due to error: Cross-Origin Request Blocked. We may need Juan or Q to help with this one. 
+    //   form.addEventListener('submit', (event) => {
+    //   event.preventDefault();
+    //   console.log(event);
+    //   const gameSearch = event.target.gameSearch.value;
+    //   console.log(gameSearch);
+    //   fetch(`http://www.gamespot.com/api/games/?api_key=${apiKey}`)
+    //     .then(res => res.json())
+    //     .then(data => {
+    //       console.log(data);
+    //       // COMMENTING OUT FOR LOOP UNTIL ABOVE ISSUE IS RESOLVED
+    //       // for(i=0; i<data.length; i++){
+    //       //   const gameListItem = document.createElement("li");
+    //       //   const gameList = document.getElementById("gameList");
+    //       //   gameList.appendChild(gameListItem);
+    //       //   gameListItem.innerHTML = `
+    //       //   ${data[i].external}
+    //       //   `
+    //       // }
+    //     });
+    // });
+  
+  </script>
+
+</body>
+
+</html>
