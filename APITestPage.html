@@ -8,6 +8,8 @@
   <title>API TEST SITE</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<!--- temporary code to resolve favicon error --->
+    <link rel="shortcut icon" href="#">
 <style>
   form {
       text-align:center;
@@ -137,28 +139,42 @@
 
 
   //RAWG API -- OUR BEST BET SO FAR!!!
-  // const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
-  // form.addEventListener('submit', (event) => {
-  // event.preventDefault();
-  // console.log(event);
-  // const gameSearch = event.target.gameSearch.value;
-  // console.log(gameSearch);
-  // fetch(`https://api.rawg.io/api/games/${gameSearch}?key=${rawgAPi}`)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     const gameName = document.getElementById("gameName")
-  //     const gameDescription = document.getElementById("gameDescription")
-  //     const image = document.getElementById("gameImage")
-  //     const gameSite = document.getElementById("gameSite")
-  //     const gameMeta = document.getElementById("gameMeta")
-  //     gameName.innerHTML = `${data.name} comes out on ${data.released}`
-  //     gameDescription.innerHTML = `${data.description}`
-  //     image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
-  //     gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-  //     gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
-  //   });
-  // });
+  const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+  form.addEventListener ('submit', (event) => {
+  event.preventDefault();
+  console.log(event);
+  const gameSearch = event.target.gameSearch.value;
+  //converts game search to slug
+  function slugify(str) {
+  return String(str)
+    .toLowerCase() // convert to lowercase
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+  }
+//running into favicon.ico error
+  const gameSearchslug = (slugify(`${gameSearch}`))
+  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+    .then(res => res.json())
+    .then(data => {
+// Added code that would take the searched term and converted it to slug then to id.
+  const id = (`${data.slug}`)
+  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      const gameName = document.getElementById("gameName")
+      const gameDescription = document.getElementById("gameDescription")
+      const image = document.getElementById("gameImage")
+      const gameSite = document.getElementById("gameSite")
+      const gameMeta = document.getElementById("gameMeta")
+      gameName.innerHTML = `${data.name} comes out on ${data.released}`
+      gameDescription.innerHTML = `${data.description}`
+      image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+      gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+      gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+    })
+    })
+  });
+  
 
 
 
@@ -196,29 +212,30 @@
 //   });
 
   //Giantbomb API
-  // const giantBombAPI = "9aabdd82c6cdeb206cef7ded8f7020419b53d21e"
+  // const giantBombAPI = "4ccf8f3bad38d69d7a94f106fe749bdff1d91ef5"
   // form.addEventListener('submit', (event) => {
   // event.preventDefault();
   // console.log(event);
   // const gameSearch = event.target.gameSearch.value;
   // console.log(gameSearch);
   // //the below fetch needs to take in an ID instead of a search value. Need to figure out how to replace somehow if possible.
-  // //fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/game/${gameSearch}/?format=json&api_key=${giantBombAPI}`)
+  // fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?api_key=${giantBombAPI}`)
+  
   // //the below fetch works the same way as the gamespot one will work for all game releases. Redundancy for now but maybe giantbomb can be more flexible
-  // fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/releases/?format=json&api_key=${giantBombAPI}`)
+  // // fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/releases/?format=json&api_key=${giantBombAPI}`)
   //   .then(res => res.json())
   //   .then(data => {
   //     console.log(data);
-  //     // const gameName = document.getElementById("gameName")
-  //     // const gameDescription = document.getElementById("gameDescription")
-  //     // const image = document.getElementById("gameImage")
-  //     // const gameSite = document.getElementById("gameSite")
-  //     // const gameMeta = document.getElementById("gameMeta")
-  //     // gameName.innerHTML = `${data.name} comes out on ${data.released}`
-  //     // gameDescription.innerHTML = `${data.description}`
-  //     // image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
-  //     // gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-  //     // gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+  //     const gameName = document.getElementById("gameName")
+  //     const gameDescription = document.getElementById("gameDescription")
+  //     const image = document.getElementById("gameImage")
+  //     const gameSite = document.getElementById("gameSite")
+  //     const gameMeta = document.getElementById("gameMeta")
+  //     gameName.innerHTML = `${data.name} comes out on ${data.released}`
+  //     gameDescription.innerHTML = `${data.description}`
+  //     image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+  //     gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+  //     gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
   //   });
   // });
   </script>
