@@ -240,12 +240,12 @@ section {
   }
 //running into favicon.ico error
   const gameSearchslug = (slugify(`${gameSearch}`))
-  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}&?format=json&?key=${rawgAPi}&search_exact=false&search_precise=false`)
     .then(res => res.json())
     .then(data => {
 // Added code that would take the searched term and converted it to slug then to id.
   const id = (`${data.slug}`)
-  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}&?format=json&?key=${rawgAPi}`)
     .then(res => res.json())
     .then(data => {
       console.log(data);
