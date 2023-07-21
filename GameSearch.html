@@ -15,20 +15,26 @@
       height: 400px;
       object-fit: cover;
  }
-  form {
+#gameSearchForm {
+    position: fixed;
       text-align:center;
+      top: 55px;
+      right: 400px;
+
   }
 
 /* Add a black background color to the top navigation */
 .topnav {
-  position: relative;
+  width: 100%;
+  position: fixed;
   background-color: #960404;
   overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
+  position: static;
+  float: right;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -51,8 +57,8 @@
 /* Centered section inside the top navigation */
 .topnav-centered a {
   float: none;
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 2.4%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -79,6 +85,7 @@
 
 html,
 .root {
+  min-height: 100%;
   padding: 0;
   margin: 0;
   font-size: 18px;
@@ -128,6 +135,7 @@ details summary {
 }
 
 details summary:after {
+  min-height: 100%;
   content: "+";
   color: black;
   position: absolute;
@@ -146,16 +154,24 @@ details[open] summary:after {
 details summary {
   outline: 0;
 }
-details p {
+details {
   font-size: 0.95rem;
   margin: 0 0 1rem;
   padding-top: 1rem;
 }
 
+
 body {
-  background: radial-gradient(circle at bottom, rgb(11, 112, 158) 0, rgb(0, 0, 0) 100%);
-  height: 100vh;
-  overflow: hidden;
+  background: radial-gradient(circle at right, rgb(11, 112, 158) 0, rgb(0, 0, 0) 100%);
+  height: 400vh ;
+}
+
+#gameDescription {
+  font-size: larger ;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+  padding: 20px;
 }
 
 h1 {
@@ -189,9 +205,11 @@ section {
     </div>
  </div> 
 
- <form id="gameSearch">
-  <input id="gameSearch" name="gameSearch" type="text">
-  <button>MOAR GAMES</button>
+ <form id="gameSearchForm">
+  <!-- <input id="gameSearch" name="gameSearch" type="text">
+  <button id="btn">MOAR GAMES</button> -->
+  <input type="button" value="Click me" onclick="alert('You clicked the button!')">
+
 </form>
 
  <section>
@@ -225,12 +243,16 @@ section {
 
 <!-- NAV BAR -->
 <script>
+  const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+//running into favicon.ico error
   const form = document.getElementById("gameSearch");
   const gameData = document.getElementById("gameData");
-    const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
-  form.addEventListener ('submit', (event) => {
+  const button = document.querySelector('#btn')
+    button.addEventListener('click', function () {
+      alert('click')
+  form.addEventListener ("submit", (event) => {
   event.preventDefault();
-  console.log(event);
+  console.log(form);
   const gameSearch = event.target.gameSearch.value;
   //converts game search to slug
   function slugify(str) {
@@ -238,7 +260,7 @@ section {
     .toLowerCase() // convert to lowercase
     .replace(/\s+/g, '-') // replace spaces with hyphens
   }
-//running into favicon.ico error
+
   const gameSearchslug = (slugify(`${gameSearch}`))
   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}&?format=json&?key=${rawgAPi}&search_exact=false&search_precise=false`)
     .then(res => res.json())
@@ -264,7 +286,9 @@ section {
       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
     })
     })
-  });
+    })
+    })
+  ;;
 
   // const Games = [];
   // Games.unshift("");

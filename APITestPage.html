@@ -54,7 +54,7 @@
     <a href="#" id="card-link2"></a>
   </div>
 </div>
-  <script>
+ <script>
   const form = document.getElementById("gameSearch");
   const gameData = document.getElementById("gameData");
 //CHEAPSHARK API - Search by Game Title and populate gameList <ul> with the game titles in <li>
@@ -213,7 +213,7 @@
 
 
 const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
-const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+// const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
@@ -224,6 +224,8 @@ form.addEventListener('submit', (event) => {
   let tmrwDay = date.getDate() + 1;
   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
   gameList.innerHTML = "";
+  
+
   //below fetch will use search box and pull all games matching that search query in data
   fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch},release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
   .then(res => res.json())
@@ -276,10 +278,99 @@ form.addEventListener('submit', (event) => {
         gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`;
       });
   });
-});
+//   const button = document.getElementsByTagName("button")
+//   button.addEventListener('click', () =>{
+//     event.preventDefault();
+//     gameSearch = button.innerHTML
+//      //converts game search to slug
+//   function slugify(str) {
+//   return String(str)
+//     .toLowerCase() // convert to lowercase
+//     .replace(/\s+/g, '-') // replace spaces with hyphens
+//   }
+// //running into favicon.ico error
+//   const gameSearchslug = (slugify(`${gameSearch}`))
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+//     .then(res => res.json())
+//     .then(data => {
+// // Added code that would take the searched term and converted it to slug then to id.
+//   const id = (`${data.slug}`)
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log(data);
+//       const gameName = document.getElementById("gameName")
+//       const gameDescription = document.getElementById("gameDescription")
+//       const image = document.getElementById("gameImage")
+//       const gameSite = document.getElementById("gameSite")
+//       const gameMeta = document.getElementById("gameMeta")
+//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
+//       gameDescription.innerHTML = `${data.description}`
+//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+//     })
+//     });
 
 
+
+
+
+
+   
   
+        // const button2 = document.getElementsByTagName("button");
+        // button2[0,1].addEventListener('click'), (e) => {
+        // event.preventDefault();
+        // alert("you clicked a button");
+        // };
+  // button2.addEventListener('click'), () => {
+  //   alert("you clicked a button");
+  
+      //   const button2 = document.getElementsByTagName("button2");
+      //   // document.getElementsByTagName("button2").setAttribute("name","button");
+      //   button2.id="button2";
+      //   button2.class="button2";
+      // console.log (button2);
+      // button2.addEventListener('click'), () => {
+      //   alert("you clicked a button")
+      // }
+    //  btn[0].addEventListener('click', () => {
+    // event.preventDefault();
+    // })
+    // gameSearch = button.innerHTML
+     //converts game search to slug
+//   function slugify(str) {
+//   return String(str)
+//     .toLowerCase() // convert to lowercase
+//     .replace(/\s+/g, '-') // replace spaces with hyphens
+//   }
+// //running into favicon.ico error
+//   const gameSearchslug = (slugify(`${gameSearch}`))
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+//     .then(res => res.json())
+//     .then(data => {
+// // Added code that would take the searched term and converted it to slug then to id.
+//   const id = (`${data.slug}`)
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log(data);
+//       const gameName = document.getElementById("gameName")
+//       const gameDescription = document.getElementById("gameDescription")
+//       const image = document.getElementById("gameImage")
+//       const gameSite = document.getElementById("gameSite")
+//       const gameMeta = document.getElementById("gameMeta")
+//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
+//       gameDescription.innerHTML = `${data.description}`
+//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+//     })
+//     });
+
+//   })
+
 
 
 
