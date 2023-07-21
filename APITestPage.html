@@ -213,7 +213,7 @@
 
 
 const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
-const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+// const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
 form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
@@ -237,46 +237,48 @@ form.addEventListener('submit', (event) => {
         gameList.appendChild(gameListItem);
         gameListItem.innerHTML = `
         ${data.results[i].name}
-        <img src="${data.results[i].image.original}" width = "200" height = "150">
+        <img src="${data.results[i].image.original}" 
+        onclick="location.href='./GameSearch.html';" width = "200" height = "150">
         `
       }
+//above transfers to .gameSearch.html
    });
   });
-  const button = document.getElementsByTagName("button")
-  button.addEventListener('click', () =>{
-    event.preventDefault();
-    gameSearch = button.innerHTML
-     //converts game search to slug
-  function slugify(str) {
-  return String(str)
-    .toLowerCase() // convert to lowercase
-    .replace(/\s+/g, '-') // replace spaces with hyphens
-  }
-//running into favicon.ico error
-  const gameSearchslug = (slugify(`${gameSearch}`))
-  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
-    .then(res => res.json())
-    .then(data => {
-// Added code that would take the searched term and converted it to slug then to id.
-  const id = (`${data.slug}`)
-  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      const gameName = document.getElementById("gameName")
-      const gameDescription = document.getElementById("gameDescription")
-      const image = document.getElementById("gameImage")
-      const gameSite = document.getElementById("gameSite")
-      const gameMeta = document.getElementById("gameMeta")
-      gameName.innerHTML = `${data.name} comes out on ${data.released}`
-      gameDescription.innerHTML = `${data.description}`
-      image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
-      gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-      gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
-    })
-    });
+//   const button = document.getElementsByTagName("button")
+//   button.addEventListener('click', () =>{
+//     event.preventDefault();
+//     gameSearch = button.innerHTML
+//      //converts game search to slug
+//   function slugify(str) {
+//   return String(str)
+//     .toLowerCase() // convert to lowercase
+//     .replace(/\s+/g, '-') // replace spaces with hyphens
+//   }
+// //running into favicon.ico error
+//   const gameSearchslug = (slugify(`${gameSearch}`))
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+//     .then(res => res.json())
+//     .then(data => {
+// // Added code that would take the searched term and converted it to slug then to id.
+//   const id = (`${data.slug}`)
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log(data);
+//       const gameName = document.getElementById("gameName")
+//       const gameDescription = document.getElementById("gameDescription")
+//       const image = document.getElementById("gameImage")
+//       const gameSite = document.getElementById("gameSite")
+//       const gameMeta = document.getElementById("gameMeta")
+//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
+//       gameDescription.innerHTML = `${data.description}`
+//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+//     })
+//     });
 
-  })
+
 
 
 
