@@ -31,7 +31,7 @@
 <!-- Search box -->
   <form id="gameSearch">
     <input id="gameSearch" name="gameSearch" type="text">
-    <button>Get Games</button>
+    <button id = "gameButtonSearch">Get Games</button>
   </form>
 <!-- This is just a div for games to populate for related games from cheapshark api -->
   <div id="gameData">
@@ -139,12 +139,112 @@
 
 
   //RAWG API -- OUR BEST BET SO FAR!!!
+//   const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+//   form.addEventListener ('submit', (event) => {
+//   event.preventDefault();
+//   console.log(event);
+//   const gameSearch = event.target.gameSearch.value;
+//   //converts game search to slug
+//   function slugify(str) {
+//   return String(str)
+//     .toLowerCase() // convert to lowercase
+//     .replace(/\s+/g, '-') // replace spaces with hyphens
+//   }
+// //running into favicon.ico error
+//   const gameSearchslug = (slugify(`${gameSearch}`))
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+//     .then(res => res.json())
+//     .then(data => {
+// // Added code that would take the searched term and converted it to slug then to id.
+//   const id = (`${data.slug}`)
+//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+//     .then(res => res.json())
+//     .then(data => {
+//       console.log(data);
+//       const gameName = document.getElementById("gameName")
+//       const gameDescription = document.getElementById("gameDescription")
+//       const image = document.getElementById("gameImage")
+//       const gameSite = document.getElementById("gameSite")
+//       const gameMeta = document.getElementById("gameMeta")
+//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
+//       gameDescription.innerHTML = `${data.description}`
+//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+//     })
+//     })
+//   });
+
+  
+//STILL WORKING ON BELOW CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// //Gamespot API 42ca3a8ff2dc770f2e69d2367678840e5faef0ce  
+
+  // const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
+  // form.addEventListener('submit', (event) => {
+  // event.preventDefault();
+  // console.log(event);
+  // const gameSearch = event.target.gameSearch.value;
+  // const date = new Date();
+  // let tmrwYear = date.getYear().toString().substr(-2);
+  // let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
+  // let tmrwDay = date.getDate() + 1;
+  // let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`
+  // console.log(tmrwDate);
+  // console.log(gameSearch);
+  // //below fetch will use search box and pull all games matching that search query in data
+  // //  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${gameSpotAPI}`)
+  // //below fetch will be able to find all games releasing from "tomorrow" until the forseeable future (July 1st 2033). Only one filter can be active in URL at a time? Maybe ask Juan. There's too many duplicates because we can't filter out by console, and there's a ton of junk on steam store. 
+  //  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/releases/?format=json&filter=name:${gameSearch},release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data);
+  //     const gameName = document.getElementById("gameName")
+  //     const gameDescription = document.getElementById("gameDescription")
+  //     const image = document.getElementById("gameImage")
+  //     const gameSite = document.getElementById("gameSite")
+  //     const gameMeta = document.getElementById("gameMeta")
+  //     gameName.innerHTML = `${data.name} comes out on ${data.released}`
+  //     gameDescription.innerHTML = `${data.description}`
+  //     image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+  //     gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+  //     gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+  //   })
+  //   })
+
+
+  const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
   const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
-  form.addEventListener ('submit', (event) => {
+  form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
   const gameSearch = event.target.gameSearch.value;
-  //converts game search to slug
+  const date = new Date();
+  let tmrwYear = date.getYear().toString().substr(-2);
+  let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
+  let tmrwDay = date.getDate() + 1;
+  let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`
+  gameList.innerHTML = "";
+  //below fetch will use search box and pull all games matching that search query in data
+    fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${gameSpotAPI}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      for(i=0; i<data.results.length; i++){
+        const gameListItem = document.createElement("button");
+        const gameList = document.getElementById("gameList");
+        gameList.appendChild(gameListItem);
+        gameListItem.innerHTML = `
+        ${data.results[i].name}
+        <img src="${data.results[i].image.original}" width = "200" height = "150">
+        `
+      }
+   });
+  });
+  const button = document.getElementsByTagName("button")
+  button.addEventListener('click', () =>{
+    event.preventDefault();
+    gameSearch = button.innerHTML
+     //converts game search to slug
   function slugify(str) {
   return String(str)
     .toLowerCase() // convert to lowercase
@@ -172,47 +272,24 @@
       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
     })
-    })
-  });
-  
+    });
+
+  })
 
 
 
-  //STILL WORKING ON BELOW CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// //Gamespot API 42ca3a8ff2dc770f2e69d2367678840e5faef0ce  
 
-//   const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
-//   form.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   console.log(event);
-//   const gameSearch = event.target.gameSearch.value;
-//   const date = new Date();
-//   let tmrwYear = date.getYear().toString().substr(-2);
-//   let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
-//   let tmrwDay = date.getDate() + 1;
-//   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`
-//   console.log(tmrwDate);
-//   console.log(gameSearch);
-//   //below fetch will use search box and pull all games matching that search query in data
-//   //  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${gameSpotAPI}`)
-//   //below fetch will be able to find all games releasing from "tomorrow" until the forseeable future (July 1st 2033). Only one filter can be active in URL at a time? Maybe ask Juan. There's too many duplicates because we can't filter out by console, and there's a ton of junk on steam store. 
-//    fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/releases/?format=json&filter=release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log(data);
-//       const gameName = document.getElementById("gameName")
-//       const gameDescription = document.getElementById("gameDescription")
-//       const image = document.getElementById("gameImage")
-//       const gameSite = document.getElementById("gameSite")
-//       const gameMeta = document.getElementById("gameMeta")
-//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
-//       gameDescription.innerHTML = `${data.description}`
-//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
-//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
-//     })
-//     })
-//   });
+
+
+
+
+
+
+
+
+
+
+
 
   //Giantbomb API
   // const giantBombAPI = "4ccf8f3bad38d69d7a94f106fe749bdff1d91ef5"
