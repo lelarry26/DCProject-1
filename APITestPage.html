@@ -225,7 +225,7 @@ form.addEventListener('submit', (event) => {
   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
   gameList.innerHTML = "";
   //below fetch will use search box and pull all games matching that search query in data
-  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${gameSpotAPI}`)
+  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch},release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
   .then(res => res.json())
   .then(data => {
     console.log(data);
@@ -236,19 +236,19 @@ form.addEventListener('submit', (event) => {
       gameList.appendChild(gameListItem);
       gameListItem.innerHTML = `
       ${data.results[i].name}
-      <img src="${data.results[i].image.original}" width = "200" height = "150">
+      
       `;
     };
   });
   //PROBLEM AREAvv
-  // let gameButton = document.getElementById("button");
-  // for(let j=0; j<=gameButton.length; j++){
-  //   gameButton.addEventListener('click', (event) => {
-  //     event.preventDefault();
-  //     console.log("function worked");
-  //     gameSpecificSearch = gameButton[j].innerText
-  //     });
-  // }
+  let gameButton = document.getElementById("btnClass");
+  
+    gameButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log("function worked");
+      gameSpecificSearch = gameButton.innerText
+      });
+  
   //PROBLEM AREA^^
   function slugify(str){
     return String(str)
