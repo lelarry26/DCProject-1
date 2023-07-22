@@ -58,8 +58,12 @@
   form.addEventListener('submit', (event) => {
   event.preventDefault();
   const gameSearch = event.target.gameSearch.value;
-  console.log(gameSearch);
-  fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${giantBombAPI}`)
+  const date = new Date();
+  let tmrwYear = date.getYear().toString().substr(-2);
+  let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
+  let tmrwDay = date.getDate() + 1;
+  let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`
+  fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|330701&api_key=${giantBombAPI}`)
     .then(res => res.json())
     .then(data => {
       console.log(data);
@@ -77,9 +81,6 @@
       })
     });
   });
-
-
-
   </script>
 
 </body>
