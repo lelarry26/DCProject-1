@@ -87,23 +87,23 @@ form.addEventListener('submit', (event) => {
       //       TEST
       //       <div id="dataresult">${data.results[i].release_date}</div>
       //   `
-      data.results.map((datum) => {
-        const gameListItem = document.createElement("div");
-        const gameList = document.getElementById("gameList");
-        gameList.appendChild(gameListItem);
-        gameListItem.innerHTML = `
-          ${datum.name}
-          <img src="${datum.image.original}" width = "200" height = "150">
-            TEST
-            <div id="dataresult">${datum.release_date}</div>
-        `
-      })
-      if (`${datum.image.original}` === null) {
-          document.getElementsByTagName("img").innerHTML = "<img src='https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'>"
-        }
+      // data.results.map((datum) => {
+      //   const gameListItem = document.createElement("div");
+      //   const gameList = document.getElementById("gameList");
+      //   gameList.appendChild(gameListItem);
+      //   gameListItem.innerHTML = `
+      //     ${datum.name}
+      //     <img src="${datum.image.original}" width = "200" height = "150">
+      //       TEST
+      //       <div id="dataresult">${datum.release_date}</div>
+      //   `
+      // })
+      // if (`${datum.image.original}` === null) {
+      //     document.getElementsByTagName("img").innerHTML = "<img src='https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'>"
+        })
     })
 
-});
+
 //above transfers to .gameSearch.html
   //  });
 //   const button = document.getElementsByTagName("button")
