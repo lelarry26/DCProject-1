@@ -128,213 +128,54 @@
   //   })
 
 
-
-// //WORKING CODEvvv
-// form.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce";
-//   const gameSearch = encodeURIComponent(event.target.gameSearch.value);
-//   const date = new Date();
-//   let tmrwYear = date.getYear().toString().substr(-2);
-//   let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
-//   let tmrwDay = date.getDate() + 1;
-//   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
-
-//   gameList.innerHTML = "";
-//   console.log(gameSearch);
-//   fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch},release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
-//   .then(res => res.json())
-//   .then(data => {
-//     console.log(data);
-//     data.results.map((datum) => {
-//       const gameListItem = document.createElement("button");
-//       const gameList = document.getElementById("gameList");
-      
-//       gameList.appendChild(gameListItem);
-//       gameListItem.innerHTML = `
-//       ${datum.name}
-//       <img src="${datum.image.original}"
-//       onclick="location.href='./GameSearch.html?gameSearch=${datum.name}';" width = "200" height = "150">
-//       TEST
-//       <div id="dataresult">${datum.release_date}</div>
-//       `
-//     })
-//   });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-// form.addEventListener('submit', (event) => {
-//   event.preventDefault();
-//   const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce";
-//   const gameSearch = encodeURIComponent(event.target.gameSearch.value);
-//   const date = new Date();
-//   let tmrwYear = date.getYear().toString().substr(-2);
-//   let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
-//   let tmrwDay = date.getDate() + 1;
-//   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
-
-//   gameList.innerHTML = "";
-//   console.log(gameSearch);
-//   fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch},release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
-//   .then(res => res.json())
-//   .then(data => {
-//     console.log(data);
-//     data.results.map((datum) => {
-//       const gameList = document.getElementById("gameList");
-//       const gameName = document.getElementById("gameName");
-//       const gameDescription = document.getElementById("gameDescription");
-//       const image = document.getElementById("gameImage");
-//       const gameSite = document.getElementById("gameSite");
-//       const gameMeta = document.getElementById("gameMeta");
-
-//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
-//       gameDescription.innerHTML = `${data.description}`;
-//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`;
-//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`;
-//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`;
-    
-      
-//       gameList.appendChild(gameListItem);
-//       gameListItem.innerHTML = `
-//       ${datum.name}
-//       <img src="${datum.image.original}"
-//       onclick="location.href='./GameSearch.html?gameSearch=${datum.name}';" width = "200" height = "150">
-//       TEST
-//       <div id="dataresult">${datum.release_date}</div>
-//       `
-//     })
-//   });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Larry unsolves solution with for loop, lesss effecient
-    // for(i=0; i<data.results.length; i++){
-    //   const gameListItem = document.createElement("button");
-    //   gameListItem.setAttribute('id', 'btnClass');
-
-    //   const gameList = document.getElementById("gameList");
-    //   gameList.appendChild(gameListItem);
-    //   gameListItem.innerHTML = `
-    //     ${data.results[i].name}
-    //   `;
-    // };
-
-// // const gameList = document.querySelectorAll("btnClass");
-// //NEED TO GET THE BELOW LINE TO WORK WITH btnClass!!! How to getElementById for unmade element?
-// const gameList = document.getElementById("gameList");
-// // gameList.onclick = function(){
-//   gameList.addEventListener('click', (event) => {
-//   const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91";
-//   event.preventDefault();
-//   console.log("function worked");
-//   gameSpecificSearch = gameList.innerText;
-//   console.log(gameSpecificSearch);
-//   function slugify(str){
-//     return String(str)
-//     .toLowerCase()
-//     .replace(/\s+/g, '-')
-//     .replace(/'/g, '')
-//   }
+const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
+// const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
+  console.log(event);
+  const gameSearch = event.target.gameSearch.value;
+  const date = new Date();
+  let tmrwYear = date.getYear().toString().substr(-2);
+  let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
+  let tmrwDay = date.getDate() + 1;
+  let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
+  gameList.innerHTML = "";
   
-//   let gameSpecificSearchslug = encodeURIComponent(slugify(`${gameSpecificSearch}`));
-//   console.log(gameSpecificSearchslug)
-//   fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSpecificSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
-//   .then(res => res.json())
-//   .then(data => {
-//     const id = (`${data.slug}`);
-//     console.log(data);
-//     fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
-//     .then(res => res.json())
-//     .then(data => {
-//       console.log(data);
-//       const gameName = document.getElementById("gameName");
-//       const gameDescription = document.getElementById("gameDescription");
-//       const image = document.getElementById("gameImage");
-//       const gameSite = document.getElementById("gameSite");
-//       const gameMeta = document.getElementById("gameMeta");
-//       gameName.innerHTML = `${data.name} comes out on ${data.released}`
-//       gameDescription.innerHTML = `${data.description}`;
-//       image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`;
-//       gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`;
-//       gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`;
-//     });
-//   });
-// });
-//WORKING CODE ^^^
 
-
-
-
-
-
-
-
-
-
-//DEREK SOLUTION!!! Best shot
-// for(i=0; i<data.results.length; i++){
+  //below fetch will use search box and pull all games matching that search query in data
+    fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${gameSpotAPI}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      // for(i=0; i<data.results.length; i++){
       //   const gameListItem = document.createElement("button");
       //   const gameList = document.getElementById("gameList");
       //   gameList.appendChild(gameListItem);
       //   gameListItem.innerHTML = `
       //     ${data.results[i].name}
-      //     <img src="${data.results[i].image.original}"
+      //     <img src="${data.results[i].image.original}" 
       //       onclick="location.href='./GameSearch.html?gameSearch=${data.results[i].name}';" width = "200" height = "150">
       //       TEST
       //       <div id="dataresult">${data.results[i].release_date}</div>
+
       //   `
       // }
-      // data.results.map((datum) => {
-      //   const gameListItem = document.createElement("button");
-      //   const gameList = document.getElementById("gameList");
-      //   gameList.appendChild(gameListItem);
-      //   gameListItem.innerHTML = `
-      //     ${datum.name}
-      //     <img src="${datum.image.original}"
-      //       onclick="location.href='./GameSearch.html?gameSearch=${datum.name}';" width = "200" height = "150">
-      //       TEST
-      //       <div id="dataresult">${datum.release_date}</div>
-      //   `
-      // })
+      data.results.map((datum) => {
+        // const gameListItem = document.createElement("button");
+        const gameList = document.getElementById("gameList");
+        // gameList.appendChild(gameListItem);
+        gameList.innerHTML = `
+          ${datum.name}
+          <img src="${datum.image.original}"" width = "200" height = "150">
+            TEST
+            <div id="dataresult">${datum.release_date}</div>
+        `
+      })
 
-
-
-
-
-
-
-
+    
+//above transfers to .gameSearch.html
+   });
+  });
 //   const button = document.getElementsByTagName("button")
 //   button.addEventListener('click', () =>{
 //     event.preventDefault();
