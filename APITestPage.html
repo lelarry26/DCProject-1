@@ -56,76 +56,6 @@
  <script>
   const form = document.getElementById("gameSearch");
   const gameData = document.getElementById("gameData");
-   
-//OPENCRITIC API - This one will tell you the 8 nearest upcoming games and the release dates on initial window load
-    // window.addEventListener('load', (event) => {
-    //   event.preventDefault();
-    //   console.log(event);
-    //   const url = `https://opencritic-api.p.rapidapi.com/game/upcoming`;
-    //   const options = {
-	  //     method: 'GET',
-	  //     headers: {
-		//       'X-RapidAPI-Key': '6acd22919fmsh67d97738d0c2b37p1c55b4jsnf3f6b669c6cd',
-		//       'X-RapidAPI-Host': 'opencritic-api.p.rapidapi.com'
-	  //     }
-    //   };
-    // try {
-	  //   const response = fetch(url, options)
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log("this is the data")
-    //     console.log(data);
-    //     for(i=0; i<data.length; i++){
-    //       const gameListItem = document.createElement("li");
-    //       const gameList = document.getElementById("gameList");
-    //       gameList.appendChild(gameListItem);
-    //       gameListItem.innerHTML = `${data[i].name}, is releasing on ${data[i].firstReleaseDate}`
-    //       console.log("Looped")
-    //     }
-    //   });
-    // }
-    // catch (error) {
-    //   console.log("this is the error")
-	  //   console.error(error);
-    // }
-    // });
-
-  
-//STILL WORKING ON BELOW CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// //Gamespot API 42ca3a8ff2dc770f2e69d2367678840e5faef0ce  
-
-  // const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
-  // form.addEventListener('submit', (event) => {
-  // event.preventDefault();
-  // console.log(event);
-  // const gameSearch = event.target.gameSearch.value;
-  // const date = new Date();
-  // let tmrwYear = date.getYear().toString().substr(-2);
-  // let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
-  // let tmrwDay = date.getDate() + 1;
-  // let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`
-  // console.log(tmrwDate);
-  // console.log(gameSearch);
-  // //below fetch will use search box and pull all games matching that search query in data
-  // //  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${gameSpotAPI}`)
-  // //below fetch will be able to find all games releasing from "tomorrow" until the forseeable future (July 1st 2033). Only one filter can be active in URL at a time? Maybe ask Juan. There's too many duplicates because we can't filter out by console, and there's a ton of junk on steam store. 
-  //  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/releases/?format=json&filter=name:${gameSearch},release_date:${tmrwDate}|330701&api_key=${gameSpotAPI}`)
-  //   .then(res => res.json())
-  //   .then(data => {
-  //     console.log(data);
-  //     const gameName = document.getElementById("gameName")
-  //     const gameDescription = document.getElementById("gameDescription")
-  //     const image = document.getElementById("gameImage")
-  //     const gameSite = document.getElementById("gameSite")
-  //     const gameMeta = document.getElementById("gameMeta")
-  //     gameName.innerHTML = `${data.name} comes out on ${data.released}`
-  //     gameDescription.innerHTML = `${data.description}`
-  //     image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
-  //     gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-  //     gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
-  //   })
-  //   })
-
 
 const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
 // const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
@@ -133,12 +63,12 @@ form.addEventListener('submit', (event) => {
   event.preventDefault();
   console.log(event);
   const gameSearch = event.target.gameSearch.value;
-  const date = new Date();
-  let tmrwYear = date.getYear().toString().substr(-2);
-  let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
-  let tmrwDay = date.getDate() + 1;
-  let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
-  gameList.innerHTML = "";
+  // const date = new Date();
+  // let tmrwYear = date.getYear().toString().substr(-2);
+  // let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
+  // let tmrwDay = date.getDate() + 1;
+  // let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
+  // gameList.innerHTML = "";
   
 
   //below fetch will use search box and pull all games matching that search query in data
@@ -156,25 +86,26 @@ form.addEventListener('submit', (event) => {
       //       onclick="location.href='./GameSearch.html?gameSearch=${data.results[i].name}';" width = "200" height = "150">
       //       TEST
       //       <div id="dataresult">${data.results[i].release_date}</div>
-
       //   `
-      // }
       data.results.map((datum) => {
-        // const gameListItem = document.createElement("button");
+        const gameListItem = document.createElement("div");
         const gameList = document.getElementById("gameList");
-        // gameList.appendChild(gameListItem);
-        gameList.innerHTML = `
+        gameList.appendChild(gameListItem);
+        gameListItem.innerHTML = `
           ${datum.name}
           <img src="${datum.image.original}" width = "200" height = "150">
             TEST
             <div id="dataresult">${datum.release_date}</div>
         `
       })
+      if (`${datum.image.original}` === null) {
+          document.getElementsByTagName("img").innerHTML = "<img src='https://icon-library.com/images/no-picture-available-icon/no-picture-available-icon-1.jpg'>"
+        }
+    })
 
-    
-// above transfers to .gameSearch.html
-   });
-  });
+});
+//above transfers to .gameSearch.html
+  //  });
 //   const button = document.getElementsByTagName("button")
 //   button.addEventListener('click', () =>{
 //     event.preventDefault();

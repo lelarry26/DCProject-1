@@ -133,7 +133,8 @@ img {
 body {
   background: radial-gradient(circle at bottom, rgb(31, 181, 250) 0, rgb(0, 0, 0) 100%);
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
+  color: #ffffff;
 }
 
 h1 {
@@ -202,13 +203,21 @@ h1 {
       </div>
    </div>
 
+   <button onclick="playVideo()" type="button">Play</button>
+<button onclick="pauseVideo()" type="button">Pause</button><br> 
+<video id="myVid" width="400" height="200">
+ <source src="https://static-mt-rv-v1.gamespot.com/vr/2010/12/169_elderscrollsv_skyrim_20101213_1200.mp4" type="video/mp4">
+  Sorry, your browser does not support HTML5 video.
+</video>
+
    <form id="gameSearch">
       <input id="gameSearch" name="gameSearch" type="text">
       <button>Find Games!</button>
     </form>
   
     <div id="gameData">
-  
+      <ul id="gameList">
+      </ul>
     </div>
 
   <script src="projecthomepage.js">
@@ -217,3 +226,6 @@ h1 {
 </body>
 
 </html>
+
+// cards to main page test results
+// api to link
