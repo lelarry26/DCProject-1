@@ -206,9 +206,9 @@ section {
  </div> 
 
  <form id="gameSearchForm">
-  <!-- <input id="gameSearch" name="gameSearch" type="text">
-  <button id="btn">MOAR GAMES</button> -->
-  <input type="button" value="Click me" onclick="alert('You clicked the button!')">
+  <input id="gameSearch" name="gameSearch" type="text">
+  <button id="btn">MOAR GAMES</button>
+  <!-- <input type="button" value="Click me" onclick="alert('You clicked the button!')"> -->
 
 </form>
 
@@ -245,49 +245,51 @@ section {
 <script>
   const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
 //running into favicon.ico error
-  const form = document.getElementById("gameSearch");
+  const form = document.getElementById("gameSearchForm");
   const gameData = document.getElementById("gameData");
   const button = document.querySelector('#btn')
-    button.addEventListener('click', function () {
-      alert('click')
+    // button.addEventListener('click', function () {
+    //   alert('click')
   form.addEventListener ("submit", (event) => {
-  event.preventDefault();
-  console.log(form);
-  const gameSearch = event.target.gameSearch.value;
-  //converts game search to slug
-  function slugify(str) {
-  return String(str)
-    .toLowerCase() // convert to lowercase
-    .replace(/\s+/g, '-') // replace spaces with hyphens
-  }
+    event.preventDefault();
+    console.log(form);
+    const gameSearch = event.target.gameSearch.value;
+    //converts game search to slug
+    function slugify(str) {
+      return String(str)
+        .toLowerCase() // convert to lowercase
+        .replace(/\s+/g, '-') // replace spaces with hyphens
+    }
 
-  const gameSearchslug = (slugify(`${gameSearch}`))
-  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}&?format=json&?key=${rawgAPi}&search_exact=false&search_precise=false`)
-    .then(res => res.json())
-    .then(data => {
-// Added code that would take the searched term and converted it to slug then to id.
-  const id = (`${data.slug}`)
-  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}&?format=json&?key=${rawgAPi}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      const gameName = document.getElementById("gameName")
-      const gameDescription = document.getElementById("gameDescription")
-      const image = document.getElementById("img")
-      const gameSite = document.getElementById("gameSite")
-      const gameMeta = document.getElementById("gameMeta");
+    const gameSearchslug = (slugify(`${gameSearch}`))
+    fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+      .then(res => res.json())
+      .then(data => {
+  // Added code that would take the searched term and converted it to slug then to id.
+    const id = (`${data.slug}`)
+    fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}&?key=${rawgAPi}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        const gameName = document.getElementById("gameName")
+        const gameDescription = document.getElementById("gameDescription")
+        const image = document.getElementById("img")
+        const gameSite = document.getElementById("gameSite")
+        const gameMeta = document.getElementById("gameMeta");
 
-      gameName.innerHTML = `${data.name} comes out on ${data.released}`
-      gameDescription.innerHTML = `${data.description}`
+        console.game(gameName)
 
-      image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+        gameName.innerHTML = `${data.name} comes out on ${data.released}`
+        gameDescription.innerHTML = `${data.description}`
 
-      gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-      gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+        image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
+
+        gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+        gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
+      })
+      })
     })
-    })
-    })
-    })
+    
   ;;
 
   // const Games = [];
