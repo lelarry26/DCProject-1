@@ -15,26 +15,20 @@
       height: 400px;
       object-fit: cover;
  }
-#gameSearchForm {
-    position: fixed;
+  form {
       text-align:center;
-      top: 55px;
-      right: 400px;
-
   }
 
 /* Add a black background color to the top navigation */
 .topnav {
-  width: 100%;
-  position: fixed;
+  position: relative;
   background-color: #960404;
   overflow: hidden;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  position: static;
-  float: right;
+  float: left;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -57,8 +51,8 @@
 /* Centered section inside the top navigation */
 .topnav-centered a {
   float: none;
-  position: fixed;
-  top: 2.4%;
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -85,7 +79,6 @@
 
 html,
 .root {
-  min-height: 100%;
   padding: 0;
   margin: 0;
   font-size: 18px;
@@ -135,7 +128,6 @@ details summary {
 }
 
 details summary:after {
-  min-height: 100%;
   content: "+";
   color: black;
   position: absolute;
@@ -154,24 +146,16 @@ details[open] summary:after {
 details summary {
   outline: 0;
 }
-details {
+details p {
   font-size: 0.95rem;
   margin: 0 0 1rem;
   padding-top: 1rem;
 }
 
-
 body {
-  background: radial-gradient(circle at right, rgb(11, 112, 158) 0, rgb(0, 0, 0) 100%);
-  height: 400vh ;
-}
-
-#gameDescription {
-  font-size: larger ;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: center;
-  padding: 20px;
+  background: radial-gradient(circle at bottom, rgb(11, 112, 158) 0, rgb(0, 0, 0) 100%);
+  height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -205,11 +189,9 @@ section {
     </div>
  </div> 
 
- <form id="gameSearchForm">
+ <form id="gameSearch">
   <input id="gameSearch" name="gameSearch" type="text">
-  <button id="btn">MOAR GAMES</button>
-  <!-- <input type="button" value="Click me" onclick="alert('You clicked the button!')"> -->
-
+  <button>MOAR GAMES</button>
 </form>
 
  <section>
@@ -243,54 +225,46 @@ section {
 
 <!-- NAV BAR -->
 <script>
-  const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
-//running into favicon.ico error
-  const form = document.getElementById("gameSearchForm");
+  const form = document.getElementById("gameSearch");
   const gameData = document.getElementById("gameData");
-  const button = document.querySelector('#btn')
-    // button.addEventListener('click', function () {
-    //   alert('click')
-  form.addEventListener ("submit", (event) => {
-    event.preventDefault();
-    console.log(form);
-    const gameSearch = event.target.gameSearch.value;
-    //converts game search to slug
-    function slugify(str) {
-      return String(str)
-        .toLowerCase() // convert to lowercase
-        .replace(/\s+/g, '-') // replace spaces with hyphens
-    }
+    const rawgAPi = "ff0ae1ba7da843b6af414828bfa56f91"
+  form.addEventListener ('submit', (event) => {
+  event.preventDefault();
+  console.log(event);
+  const gameSearch = event.target.gameSearch.value;
+  //converts game search to slug
+  function slugify(str) {
+  return String(str)
+    .toLowerCase() // convert to lowercase
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+  }
+//running into favicon.ico error
+  const gameSearchslug = (slugify(`${gameSearch}`))
+  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
+    .then(res => res.json())
+    .then(data => {
+// Added code that would take the searched term and converted it to slug then to id.
+  const id = (`${data.slug}`)
+  fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}?key=${rawgAPi}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      const gameName = document.getElementById("gameName")
+      const gameDescription = document.getElementById("gameDescription")
+      const image = document.getElementById("img")
+      const gameSite = document.getElementById("gameSite")
+      const gameMeta = document.getElementById("gameMeta");
 
-    const gameSearchslug = (slugify(`${gameSearch}`))
-    fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${gameSearchslug}?key=${rawgAPi}&search_exact=false&search_precise=false`)
-      .then(res => res.json())
-      .then(data => {
-  // Added code that would take the searched term and converted it to slug then to id.
-    const id = (`${data.slug}`)
-    fetch(`https://cors-proxy.fringe.zone/https://api.rawg.io/api/games/${id}&?key=${rawgAPi}`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        const gameName = document.getElementById("gameName")
-        const gameDescription = document.getElementById("gameDescription")
-        const image = document.getElementById("img")
-        const gameSite = document.getElementById("gameSite")
-        const gameMeta = document.getElementById("gameMeta");
+      gameName.innerHTML = `${data.name} comes out on ${data.released}`
+      gameDescription.innerHTML = `${data.description}`
 
-        console.game(gameName)
+      image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
 
-        gameName.innerHTML = `${data.name} comes out on ${data.released}`
-        gameDescription.innerHTML = `${data.description}`
-
-        image.innerHTML = `<img src="${data.background_image}" width = "398" height = "150">`
-
-        gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
-        gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
-      })
-      })
+      gameSite.innerHTML = `<a href = "${data.website}">Click here to visit ${data.name}'s website!</a>`
+      gameMeta.innerHTML = `<a href = "${data.metacritic_url}">Click here to visit ${data.name}'s Metacritic page!</a>`
     })
-    
-  ;;
+    })
+  });
 
   // const Games = [];
   // Games.unshift("");
