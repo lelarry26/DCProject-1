@@ -32,55 +32,74 @@
     <input id="gameSearch" name="gameSearch" type="text">
     <button id = "gameButtonSearch">Get Games</button>
   </form>
-<!-- This is just a div for games to populate for related games from cheapshark api -->
-<div id="gameData">
-  <ul id="gameList">
-  </ul>
-</div>
-<!-- This is the card code I grabbed from Bootstrap -->
+
+<!-- Main Game Card -->
 <div class="card" style="width: 25rem;">
-<div id = "gameImage"></div>
-<div id="card-body">
+  <div id = "gameImage"></div>
+  <div id="card-body">
   <h5 id="gameName"></h5>
   <p id="gameDescription"></p>
 </div>
-
-<div id="card-body">
-  <a href="#" id="card-link1"></a>
-  <a href="#" id="card-link2"></a>
+</div>
+</br>
+<!-- Video Columns -->
+<div class="container text-center" display: none>
+  <div class="row align-items-start">
+    <div class="col">
+      <iframe id="gameVid1" height="200" width="300"></iframe>
+    </div>
+    <div class="col">
+      <iframe id="gameVid2" height="200" width="300"></iframe>
+    </div>
+    <div class="col">
+      <iframe id="gameVid3" height="200" width="300"></iframe> 
+    </div>
+  </div>
 </div>
  <script>
-  const form = document.getElementById("gameSearch");
-  const gameData = document.getElementById("gameData");
-   
-//Giantbomb API
-  const giantBombAPI = "4ccf8f3bad38d69d7a94f106fe749bdff1d91ef5"
-  form.addEventListener('submit', (event) => {
+const form = document.getElementById("gameSearch");
+const gameData = document.getElementById("gameData");
+  
+form.addEventListener('submit', (event) => {
   event.preventDefault();
   const gameSearch = event.target.gameSearch.value;
+  const giantBombAPI = "4ccf8f3bad38d69d7a94f106fe749bdff1d91ef5";
+  const gameSpotAPI = "42ca3a8ff2dc770f2e69d2367678840e5faef0ce"
   const date = new Date();
   let tmrwYear = date.getYear().toString().substr(-2);
   let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
   let tmrwDay = date.getDate() + 1;
-  let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`
-  fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|330701&api_key=${giantBombAPI}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      data.results.map((datum) => {
+  let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
+  //Initial Giantbomb Search
+  fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch}&api_key=${giantBombAPI}`)
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    data.results.map((datum) => {
       const gameName = document.getElementById("gameName")
       const gameDescription = document.getElementById("gameDescription")
       const image = document.getElementById("gameImage")
       const gameSite = document.getElementById("gameSite")
       const gameMeta = document.getElementById("gameMeta")
+
       gameName.innerHTML = `${datum.name} comes out on ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}`
       gameDescription.innerHTML = `${datum.deck}`
       image.innerHTML = `<img src="${datum.image.small_url}" width = "398" height = "400">`
-
-
-      })
-    });
+    })
   });
+  // Video fetch from Gamespot
+  fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/videos/?format=json&filter=title:${gameSearch},publish_date:220101|${tmrwDate}&api_key=${gameSpotAPI}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+        let videoContainer1 = document.getElementById("gameVid1");
+        let videoContainer2 = document.getElementById("gameVid2");
+        let videoContainer3 = document.getElementById("gameVid3");
+        videoContainer1.setAttribute("src", `${data.results[0].low_url}`)
+        videoContainer2.setAttribute("src", `${data.results[1].low_url}`)
+        videoContainer3.setAttribute("src", `${data.results[2].low_url}`)
+    });
+});
   </script>
 
 </body>
