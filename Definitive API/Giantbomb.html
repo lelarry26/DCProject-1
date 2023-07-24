@@ -87,6 +87,7 @@ form.addEventListener('submit', async (event) => {
       gameName.innerHTML = "Sorry, it looks like that game has already been released or may not have a release date yet";
       gameDescription.innerHTML = "";
       image.innerHTML = `<img src="https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk=" width="398" height="400">`;
+      
     }
     else if (giantBombData.number_of_total_results >= Number (1)){
       giantBombData.results.map((datum) => {
