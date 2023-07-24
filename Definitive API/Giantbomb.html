@@ -71,6 +71,7 @@ form.addEventListener('submit', async (event) => {
   let tmrwMonth = String(date.getMonth() + 1).padStart(2, "0");
   let tmrwDay = date.getDate() + 1;
   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
+
   try {
     // Initial Giantbomb Search
     const giantBombResponse = await fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|20330701&api_key=${giantBombAPI}`);
