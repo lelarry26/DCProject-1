@@ -197,29 +197,18 @@ section {
  <section>
   <div id="img"></div>
   <h1 id="gameName">
-      GameTitle
+      ${datum.name}
     </h1>
     <details>
-      <summary>Details</summary>
+      <h2> Expected release date - ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}</h2>
       <p id ="gameSite">
-        Lorem ipsum dolor sit amet, eu alia suscipit mei. Reque iriure delectus vix id, ex sed forensibus suscipiantur. In eos exerci mollis apeirian, an qui latine alienum. Ad mea libris maluisset, consul assueverit sea ex.
-      </p>
-    </details>
-    <details>
-      <summary>Features</summary>
-      <p>
-        Lorem ipsum dolor sit amet, eu alia suscipit mei. Reque iriure delectus vix id, ex sed forensibus suscipiantur. In eos exerci mollis apeirian, an qui latine alienum. Ad mea libris maluisset, consul assueverit sea ex.
+        ${datum.deck}
       </p>
     </details>
     <details>
       <summary>Information
       </summary>
-      <p id="gameDescription">Lorem ipsum dolor sit amet, eu alia suscipit mei. Reque iriure delectus vix id, ex sed forensibus suscipiantur. In eos exerci mollis apeirian, an qui latine alienum. Ad mea libris maluisset, consul assueverit sea ex. </p>
-    </details>
-    <details>
-      <summary>Specifications
-      </summary>
-      <p>Lorem ipsum dolor sit amet, eu alia suscipit mei. Reque iriure delectus vix id, ex sed forensibus suscipiantur. In eos exerci mollis apeirian, an qui latine alienum. Ad mea libris maluisset, consul assueverit sea ex. </p>
+      <p id="gameDescription">${datum.deck} </p>
     </details>
   </section>
 
