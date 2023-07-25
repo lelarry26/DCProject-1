@@ -87,8 +87,8 @@ form.addEventListener('submit', async (event) => {
       gameName.innerHTML = "Sorry, it looks like that game has already been released or may not have a release date yet";
       gameDescription.innerHTML = "";
       image.innerHTML = `<img src="https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk=" width="398" height="400">`;
-      
     }
+    
     else if (giantBombData.number_of_total_results >= Number (1)){
       giantBombData.results.map((datum) => {
         gameName.innerHTML = `${datum.name} comes out on ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}`;
@@ -96,8 +96,15 @@ form.addEventListener('submit', async (event) => {
         image.innerHTML = `<img src="${datum.image.small_url}" width="398" height="400">`;
       });
     }
+
+    switch (giantBombData.number_of_total_results <= Number(1)) {
+        case "[0,1]": {
+        console.log("none");
+        break;
+        }
+      }
     // Video fetch from Gamespot
-    const gameSpotResponse = await fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/videos/?format=json&filter=title:${gameSearch},publish_date:220101|${tmrwDate}&api_key=${gameSpotAPI}`);
+    const gameSpotResponse = await fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/videos/?format=json&filter=title:${gameSearch}&api_key=${gameSpotAPI}`);
     const gameSpotData = await gameSpotResponse.json();
 
     console.log(gameSpotData);
