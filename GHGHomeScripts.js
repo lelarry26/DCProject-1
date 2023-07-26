@@ -24,7 +24,7 @@ form.addEventListener("submit", async (event) => {
   const releaseDate = document.getElementById("releaseDate");
   const knowMore = document.getElementById("knowMore");
 
-  if (giantBombData.number_of_total_results < Number(1)) {
+  if (giantBombData.number_of_total_results < 1) {
     image.setAttribute(
       "src",
       "https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk="
@@ -34,7 +34,7 @@ form.addEventListener("submit", async (event) => {
     gameDescription.innerHTML = "";
     releaseDate.innerHTML = "";
     knowMore.innerHTML = "";
-  } else if (giantBombData.number_of_total_results >= Number(1)) {
+  } else if (giantBombData.number_of_total_results >= 1) {
     giantBombData.results.map((datum) => {
       image.setAttribute("src", `${datum.image.small_url}`);
       gameName.innerHTML = `${datum.name}`;
