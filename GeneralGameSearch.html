@@ -82,18 +82,21 @@ form.addEventListener('submit', async (event) => {
     const image = document.getElementById("gameImage");
     const gameSite = document.getElementById("gameSite");
     const gameMeta = document.getElementById("gameMeta");
+    const gameRelease = document.getElementById("gameRelease");
 
     if (giantBombData.number_of_total_results < Number(1)){
+      image.innerHTML = `<img src="https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk=" width="398" height="400">`;
       gameName.innerHTML = "Sorry, it looks like that game has already been released or may not have a release date yet";
       gameDescription.innerHTML = "";
-      image.innerHTML = `<img src="https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk=" width="398" height="400">`;
+      gameRelease.innerHTML = "";
     }
     
     else if (giantBombData.number_of_total_results >= Number (1)){
       giantBombData.results.map((datum) => {
-        gameName.innerHTML = `${datum.name} comes out on ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}`;
-        gameDescription.innerHTML = `${datum.deck}`;
         image.innerHTML = `<img src="${datum.image.small_url}" width="398" height="400">`;
+        gameName.innerHTML = `${datum.name}`;
+        gameDescription.innerHTML = `${datum.deck}`;
+        gameRelease.innerHTML =  `Expected release date - ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}`
       });
     }
 
@@ -111,9 +114,15 @@ form.addEventListener('submit', async (event) => {
     let videoContainer1 = document.getElementById("gameVid1");
     let videoContainer2 = document.getElementById("gameVid2");
     let videoContainer3 = document.getElementById("gameVid3");
+    let videoContainer4 = document.getElementById("gameVid4");
     videoContainer1.setAttribute("src", `${gameSpotData.results[0].low_url}`);
     videoContainer2.setAttribute("src", `${gameSpotData.results[1].low_url}`);
     videoContainer3.setAttribute("src", `${gameSpotData.results[2].low_url}`);
+    videoContainer4.setAttribute("src", `${gameSpotData.results[3].low_url}`);
+    videoContainer1.setAttribute("controls","true");
+    videoContainer2.setAttribute("controls","true");
+    videoContainer3.setAttribute("controls","true");
+    videoContainer4.setAttribute("controls","true");
   }
   catch (error) {
     console.error('Error:', error);
