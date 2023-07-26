@@ -14,10 +14,10 @@ form.addEventListener('submit', (event) => {
    .then(data => {
       console.log(data)
 
-      //Image
+      Image
       const gameImages = document.querySelectorAll(".gameImage");
       gameImages.forEach((element, i) => {
-        element.innerHTML = `<img src="${data.results[i].image.small_url}" width="200" height="200">`;
+        element.innerHTML = `<img id="pic" src="${data.results[i].image.small_url}">`;
       });
 
       //Names
@@ -29,18 +29,23 @@ form.addEventListener('submit', (event) => {
       //Blurb
       const gameBlurbs = document.querySelectorAll(".gameBlurb");
       gameBlurbs.forEach((element, i) => {
-        element.innerHTML = `${data.results[i].description}`;
+        element.innerHTML = `${data.results[i].platform.name}`;
       });
         
       //Release Date
       const gameReleases = document.querySelectorAll(".gameRelease");
       gameReleases.forEach((element, i) => {
-        element.innerHTML = `Releases on ${data.results[i].expected_release_month}-${data.results[i].expected_release_day}-${data.results[i].expected_release_year}`;
+        document.querySelectorAll(".gameRelease");
+        if (`${data.results[i].expected_release_month}` === "null" || `${data.results[i].expected_release_day}` === "null" ) {
+          element.innerHTML= `No release date listed, only ${data.results[i].expected_release_year}`;
+        } else if (`${data.results.expected_release_month}` !== "null" || `${data.results.expected_release_day}` !== "null") {
+          element.innerHTML = `Releases on ${data.results[i].expected_release_month}-${data.results[i].expected_release_day}-${data.results[i].expected_release_year}`;
+        }
       });
-
+      
       //Game URL
       const gameURL = document.querySelectorAll(".gameURL");
-      gameReleases.forEach((element, i) => {
+      gameURL.forEach((element, i) => {
         element.innerHTML = `Check out - <a href="${data.results[i].site_detail_url}">here</a>`
       });
 
