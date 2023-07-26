@@ -173,48 +173,65 @@ body {
 
 <body>
 <!-- Top navigation -->
- <div class="topnav">
-   <div class="topnav-centered">
-     <a href="./GHGHome.html" class="active">Home</a>
-   </div>
- </div> 
+<div class="topnav">
+  <div class="topnav-centered">
+    <a href="./GHGHome.html" class="active">Home</a>
+  </div>
+</div> 
 
 <!-- Title -->
-  <h1 class="display-3 text-center" style="color: #ffffff" >Track all of your pre-ordered games here!</h1>   
+<h1 class="display-3 text-center" style="color: #ffffff" >Track all of your pre-ordered games here!</h1>   
 
 <!-- Upcoming Releases Button -->
   <div class="container text-center">
-      <div class="row align-items-start">
-        <div class="col" style="width: 18rem;">
-          <button class="upcomingbtn" onclick = "window.location.href='./GHGUpcoming.html';" type="submit">
-            <img src="https://cdn.vox-cdn.com/thumbor/BuzvenEAD6O-rM_USHjl_NkYqJo=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/16323948/vlcsnap_2019_06_06_12h14m26s043.png" class="card-img-top" alt="https://i.imgur.com/T9Prvkq.png"/> 
-          </button>
-            <div class="container">
-               <p class="card-text"><a href="./GHGUpcoming.html" style="color: #ffffff; font-weight: bold;">Trending Upcoming Releases</a></p>
-            </div>
+    <div class="row align-items-start">
+      <div class="col" style="width: 18rem;">
+        <button class="upcomingbtn" onclick = "window.location.href='./GHGUpcoming.html';" type="submit">
+          <img src="https://cdn.vox-cdn.com/thumbor/BuzvenEAD6O-rM_USHjl_NkYqJo=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/16323948/vlcsnap_2019_06_06_12h14m26s043.png" class="card-img-top" alt="https://i.imgur.com/T9Prvkq.png"/> 
+        </button>
+        <div class="container">
+          <p class="card-text"><a href="./GHGUpcoming.html" style="color: #ffffff; font-weight: bold;">Trending Upcoming Releases</a></p>
         </div>
       </div>
     </div>
   </div>
-
-   <form id="gameSearch">
-      <input id="gameSearchText" name="gameSearch" type="text">
-      <button>Find Games!</button>
-    </form>
-    
-    <section class="container-fluid">
-      <div class= "card-img-top" id = "gameImage"> </div>
-      <h1 id="gameName"></h1>
-      <p id="gameDescription"></p>
-
-    </div>
-    </br>
   
-    <div id="gameData">
-      <ul id="gameList">
-      </ul>
-    </div>
+<!-- Game Search Box -->
+<form id="gameSearch">
+    <input id="gameSearchText" name="gameSearch" type="text">
+    <button>Find Games!</button>
+  </form>
 
+<!-- Results Card -->
+<div class="container-fluid">
+  <div class="row">
+    <img id = "gameImage" width="50" height="50">
+    <div class="col">
+      <h1 id="gameName"></h1>
+      <p id="gameDescription" class="text-wrap"></p>
+      <br>
+      <h2 id="releaseDate"></h2>
+      <div id="knowMore"></div>
+    </div>
+  </div>
+</div>
+
+<div id="videoContainers" class="container-fixed">
+<div class="row align-items-start">
+  <div class="col">
+    <video class="video" id="gameVid1" height="400" width="400"></video>
+    </div>
+  <div class="col">
+  <video class="video" id="gameVid2" height="400" width="400"></video>
+  </div>
+<div class="col">
+  <video class="video" id="gameVid3" height="400" width="400"></video>
+  </div>
+<div class="col">
+  <video class="video" id="gameVid4" height="400" width="400"></video>
+  </div>
+</div></div>`
+    
 
 <script src="GHGHomeScripts.js"></script>
 </body>

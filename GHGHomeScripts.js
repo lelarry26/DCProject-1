@@ -17,49 +17,61 @@ form.addEventListener('submit', async (event) => {
     const giantBombResponse = await fetch(`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|20331231&api_key=${giantBombAPI}`);
     const giantBombData = await giantBombResponse.json();
     console.log(giantBombData);
+    const image = document.getElementById("gameImage");
     const gameName = document.getElementById("gameName");
     const gameDescription = document.getElementById("gameDescription");
-    const image = document.getElementById("gameImage");
-    const gameSite = document.getElementById("gameSite");
-    const gameMeta = document.getElementById("gameMeta");
-
+    const releaseDate = document.getElementById("releaseDate");
+    const knowMore = document.getElementById("knowMore");
+  
     if (giantBombData.number_of_total_results < Number(1)){
+      image.setAttribute ("src", "https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk=")
       gameName.innerHTML = "Sorry, it looks like that game has already been released or may not have a release date yet";
       gameDescription.innerHTML = "";
-      image.innerHTML = `<img src="https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk=" width="398" height="400">`;
+      releaseDate.innerHTML = "";
+      knowMore.innerHTML = "";
     }
+
     else if (giantBombData.number_of_total_results >= Number (1)){
-      giantBombData.results.map((datum) => {
-        gameName.innerHTML = `
-      <div class="container-fluid">
-          <div class="row">
-          <img src="${datum.image.small_url}" id = "pic"  alt="gamepicture">
-            <div id="gameinfo" class="col">
-              <h1>${datum.name}</h1>
-              <p id="gametxt" class="text-wrap">${datum.deck}</p>
-              <br>
-              <h2> Expected release date - ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}</h2>
-              <h3>Would you like to know more?</h3>
-              <p>Check out - <a href="${datum.site_detail_url}">here</a></p>
-          </div>
-      </div>
-      </br>
-        <div id="videoContainers" class="container-fixed">
-          <div class="row align-items-start">
-            <div class="col">
-              <video class="video" id="gameVid1" height="400" width="400">vid1</video>
-            </div>
-            <div class="col">
-              <video class="video" id="gameVid2" height="400" width="400">vid2</video>
-            </div>
-            <div class="col">
-              <video class="video" id="gameVid3" height="400" width="400">vid3</video> 
-            </div>
-            <div class="col">
-              <video class="video" id="gameVid4" height="400" width="400">vid3</video> 
-            </div>
-          </div>
-        </div>`
+      giantBombData.results.map((datum) => {    
+      image.setAttribute ("src", `${datum.image.small_url}`)
+      gameName.innerHTML = `${datum.name}`;
+      gameDescription.innerHTML = `${datum.deck}`;
+      releaseDate.innerHTML = `Expected release date - ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}`;
+      knowMore.innerHTML = "";
+        
+        
+      // `
+      // <div class="container-fluid">
+      //     <div class="row">
+      //     <img src="${datum.image.small_url}" id = "pic"  alt="gamepicture">
+      //       <div id="gameinfo" class="col">
+      //         <h1>${datum.name}</h1>
+      //         <p id="gametxt" class="text-wrap">${datum.deck}</p>
+      //         <br>
+      //         <h2> Expected release date - ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}</h2>
+      //         <h3>Would you like to know more?</h3>
+      //         <p>Check out - <a href="${datum.site_detail_url}">here</a></p>
+      //     </div>
+      // </div>
+
+
+      // </br>
+      //   <div id="videoContainers" class="container-fixed">
+      //     <div class="row align-items-start">
+      //       <div class="col">
+      //         <video class="video" id="gameVid1" height="400" width="400">vid1</video>
+      //       </div>
+      //       <div class="col">
+      //         <video class="video" id="gameVid2" height="400" width="400">vid2</video>
+      //       </div>
+      //       <div class="col">
+      //         <video class="video" id="gameVid3" height="400" width="400">vid3</video> 
+      //       </div>
+      //       <div class="col">
+      //         <video class="video" id="gameVid4" height="400" width="400">vid3</video> 
+      //       </div>
+      //     </div>
+      //   </div>`
         });
       }
     const gameSpotResponse = await fetch(`https://cors-proxy.fringe.zone/https://www.gamespot.com/api/videos/?format=json&filter=title:${gameSearch},publish_date:220101|${tmrwDate}&api_key=${gameSpotAPI}`);
