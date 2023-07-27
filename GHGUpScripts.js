@@ -1,4 +1,3 @@
-const form = document.getElementById("gameSearch");
 window.addEventListener('load', (event) => {
   event.preventDefault();
   const giantBombAPI = "4ccf8f3bad38d69d7a94f106fe749bdff1d91ef5";

@@ -27,10 +27,10 @@ form.addEventListener("submit", async (event) => {
   if (giantBombData.number_of_total_results < 1) {
     image.setAttribute(
       "src",
-      "https://media.gettyimages.com/id/584562884/photo/marmot-at-hole-home.webp?s=2048x2048&w=gi&k=20&c=EuEu0WDG-fSYPfWUh2MlKKve1Eg9MdUmHSOniAGJfIk="
+      "https://www.farmersalmanac.com/wp-content/uploads/2020/07/Groundhog-Day-Almanac-Forecast-i186380051-1184x630.jpeg"
     );
     gameName.innerHTML =
-      "Sorry, it looks like that game has already been released or may not have a release date yet";
+      "Sorry, it looks like that game has already been released or may not have a release date yet.";
     gameDescription.innerHTML = "";
     releaseDate.innerHTML = "";
     knowMore.innerHTML = "";
@@ -42,7 +42,7 @@ form.addEventListener("submit", async (event) => {
       gameName.innerHTML = `${datum.name}`;
       gameDescription.innerHTML = `${datum.deck}`;
       releaseDate.innerHTML = `Expected release date - ${datum.expected_release_month}-${datum.expected_release_day}-${datum.expected_release_year}`;
-      knowMore.innerHTML = "";
+      knowMore.innerHTML = `Check out more - <a href="${datum.site_detail_url}">here</a>`;
     });
   }
 
