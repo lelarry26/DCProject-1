@@ -1,7 +1,16 @@
-
-/* Responsive navigation menu - display links on top of each other instead of next to each other (for mobile devices) */
-@media screen and (max-width: 8000px) {
-  .topnav a, .topnav-right {
+@media screen and (max-width: 8000px) and (min-width: 1315px) {
+    #videoContainers .row {
+      width: 650px;
+    }
+  }
+  
+@media screen and (max-width: 1315px) {
+    #videoContainers .row, #videoContainers .gameVideo {
+        width: 100%;
+      }
+}
+  .topnav a,
+  .topnav-right {
     float: none;
     display: block;
   }
@@ -14,8 +23,8 @@
   }
 
   * {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
   }
 
   button {
@@ -38,7 +47,11 @@
   }
 
   body {
-    background: radial-gradient(circle at right, rgb(31, 181, 250) 0, rgb(0, 0, 0) 100%);
+    background: radial-gradient(
+      circle at right,
+      rgb(31, 181, 250) 0,
+      rgb(0, 0, 0) 100%
+    );
     height: 100vh;
     overflow: auto;
   }
@@ -54,7 +67,7 @@
   #gameInfo {
     background-color: #ffffff;
     color: black;
-    border-radius:  10px;
+    border-radius: 10px;
     text-align: justify;
     max-height: 400px;
     text-align: left;
@@ -64,11 +77,11 @@
     min-width: 40%;
   }
 
-  #videoContainers {
+  #videoContainers{
     margin: 5px;
-    height:auto;
-    width:100%;
-    background-color: rgb(67, 73, 77, .8);
+    height: auto;
+    width: 100%;
+    background-color: rgb(67, 73, 77, 0.8);
     border-radius: 10px;
     position: relative;
     display: flex;
@@ -79,21 +92,19 @@
     min-width: 50%;
     max-height: 100%;
     min-height: 50%;
-    float: left;
+    justify-content: center;
   }
 
- video.gameVideo {
+  video.gameVideo {
     padding: 5px;
     height: 100%;
     max-width: 100%;
-    /* max-width: 800px; */
     min-width: 50%;
-    /* max-height: 600px; */
     min-height: 50%;
   }
 
   form {
-  text-align: center;
+    text-align: center;
   }
 
   /* Add a black background color to the top navigation */
@@ -128,4 +139,3 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-}
