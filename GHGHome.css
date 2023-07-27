@@ -59,11 +59,15 @@
     max-height: 400px;
     text-align: left;
     font-size: large;
-    overflow: auto;;
+    overflow: auto;
+    max-width: 100%;
+    min-width: 40%;
   }
 
   #videoContainers {
     margin: 5px;
+    height:auto;
+    width:100%;
     background-color: rgb(67, 73, 77, .8);
     border-radius: 10px;
     position: relative;
@@ -81,7 +85,7 @@
  video.gameVideo {
     padding: 5px;
     height: 100%;
-    width: 100%;
+    max-width: 100%;
     /* max-width: 800px; */
     min-width: 50%;
     /* max-height: 600px; */
