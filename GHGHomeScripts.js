@@ -23,6 +23,8 @@ form.addEventListener("submit", async (event) => {
   const gameDescription = document.getElementById("gameDescription");
   const releaseDate = document.getElementById("releaseDate");
   const knowMore = document.getElementById("knowMore");
+  const entireCardSection = document.getElementById("sectionCard");
+  
 
   if (giantBombData.number_of_total_results < 1) {
     image.setAttribute(
@@ -38,6 +40,7 @@ form.addEventListener("submit", async (event) => {
 
   else if (giantBombData.number_of_total_results >= 1) {
     giantBombData.results.map((datum) => {
+      entireCardSection.style.display = "block";
       image.setAttribute("src", `${datum.image.small_url}`);
       gameName.innerHTML = `${datum.name}`;
       gameDescription.innerHTML = `${datum.deck}`;
