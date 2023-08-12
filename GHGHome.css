@@ -23,10 +23,7 @@
   }
 
   * {
-<<<<<<< HEAD
     min-width: 200px;
-=======
->>>>>>> e18c33d9dd5513e064a1565a14873b4ea9abb190
     margin: 0;
     padding: 0;
   }
@@ -43,8 +40,9 @@
   }
 
   button:hover {
-    background-zcolor: green;
+    background-color: green;
     object-fit: contain;
+    transform: rotate(360deg);
   }
 
   #search {
@@ -97,15 +95,9 @@
 
   #videoContainers{
     margin: 5px;
-<<<<<<< HEAD
     height:auto;
     width: 100%;
     background-color: rgb(67, 73, 77, .8);
-=======
-    height: auto;
-    width: 100%;
-    background-color: rgb(67, 73, 77, 0.8);
->>>>>>> e18c33d9dd5513e064a1565a14873b4ea9abb190
     border-radius: 10px;
     position: relative;
     display: flex;
@@ -121,16 +113,9 @@
 
   video.gameVideo {
     padding: 5px;
-<<<<<<< HEAD
     height: auto;
     width: 100%;
     max-width: 800px;
-=======
-    height: 100%;
-    max-width: 100%;
-    min-width: 50%;
-    min-height: 50%;
->>>>>>> e18c33d9dd5513e064a1565a14873b4ea9abb190
   }
 
   form {

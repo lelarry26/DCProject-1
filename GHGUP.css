@@ -59,6 +59,7 @@
   .topnav-right {
     float: right;
   }
+  
   img {
     border-radius: 25px;
     width: 400px;
@@ -106,7 +107,6 @@
     width: 400px;
   }
 }
-
 
 
 body {
