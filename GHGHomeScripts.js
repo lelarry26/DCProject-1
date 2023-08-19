@@ -1,5 +1,4 @@
 const form = document.getElementById("gameSearch");
-const gameData = document.getElementById("gameData");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -14,7 +13,7 @@ form.addEventListener("submit", async (event) => {
 
   //Initial Giantbomb Search
   const giantBombResponse = await fetch(
-    `https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|20331231&api_key=${giantBombAPI}`
+    `https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|331231&api_key=${giantBombAPI}`
   );
   const giantBombData = await giantBombResponse.json();
   console.log(giantBombData);
@@ -24,9 +23,9 @@ form.addEventListener("submit", async (event) => {
   const releaseDate = document.getElementById("releaseDate");
   const knowMore = document.getElementById("knowMore");
   const entireCardSection = document.getElementById("sectionCard");
-  
 
   if (giantBombData.number_of_total_results < 1) {
+    entireCardSection.style.display = "block";
     image.setAttribute(
       "src",
       "https://www.farmersalmanac.com/wp-content/uploads/2020/07/Groundhog-Day-Almanac-Forecast-i186380051-1184x630.jpeg"
@@ -36,9 +35,7 @@ form.addEventListener("submit", async (event) => {
     gameDescription.innerHTML = "";
     releaseDate.innerHTML = "";
     knowMore.innerHTML = "";
-  } 
-
-  else if (giantBombData.number_of_total_results >= 1) {
+  } else if (giantBombData.number_of_total_results >= 1) {
     giantBombData.results.map((datum) => {
       entireCardSection.style.display = "block";
       image.setAttribute("src", `${datum.image.small_url}`);
@@ -56,12 +53,11 @@ form.addEventListener("submit", async (event) => {
   const gameSpotData = await gameSpotResponse.json();
   let gameVideo = document.querySelectorAll(".gameVideo");
   console.log(gameSpotData);
-  if (giantBombData.number_of_total_results < 1){
+  if (giantBombData.number_of_total_results < 1) {
     gameVideo.forEach((element, i) => {
       element.style.display = "none";
     });
-  } 
-  else {
+  } else {
     gameVideo.forEach((element, i) => {
       element.setAttribute("src", `${gameSpotData.results[i].low_url}`);
       element.setAttribute("controls", "true");

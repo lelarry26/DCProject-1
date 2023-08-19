@@ -66,7 +66,6 @@
     height: 400px;
   }
 
-  
   #card-body div.gameImage {
     background-color: #ffffff;
     color: black;
@@ -79,7 +78,6 @@
     width: 200px;
     min-width: 50%;
   }
-
 
   #pic {
     display: block;
@@ -108,12 +106,16 @@
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1607c90a9b4ac16a21afd70a3dec39d9624f5c09
 body {
   background: radial-gradient(
     circle at right,
     rgb(31, 181, 250) 0,
-    rgb(0, 0, 0) 100%);
+    rgb(0, 0, 0) 100%
+  );
   height: 100vh;
   overflow: auto;
 }
