@@ -12,9 +12,8 @@ form.addEventListener("submit", async (event) => {
   let tmrwDate = `${tmrwYear}${tmrwMonth}${tmrwDay}`;
 
   //Initial Giantbomb Search
-  const giantBombResponse = await fetch(
-    `https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|331231&api_key=${giantBombAPI}`
-  );
+  const giantBombResponse = await fetch
+  (`https://cors-proxy.fringe.zone/https://www.giantbomb.com/api/games/?format=json&filter=name:${gameSearch},original_release_date:${tmrwDate}|331231&api_key=${giantBombAPI}`);
   const giantBombData = await giantBombResponse.json();
   console.log(giantBombData);
   const image = document.getElementById("gameImage");
